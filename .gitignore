@@ -1,4 +1,4 @@
-target/
+akhmetzyanov_400_hw1/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
