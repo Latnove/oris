@@ -9,6 +9,7 @@ akhmetzyanov_400_hw1/target/
 .idea/compiler.xml
 .idea/libraries/
 .idea
+.idea/
 /.idea/
 *.iws
 *.iml
