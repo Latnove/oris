@@ -25,8 +25,8 @@ public class SignUpServlet extends HttpServlet {
 
         User user = Database.getUser(login);
 
-        // пользователь уже существует с таким логином
-        if (user != null) {
+        // пользователь уже существует с таким логином, пустой логин, имя и пароль меньше 8
+        if (user != null || login.equals("") || name.equals("") || password.length() < 8) {
             resp.sendRedirect("/sign_up");
             return;
         }
