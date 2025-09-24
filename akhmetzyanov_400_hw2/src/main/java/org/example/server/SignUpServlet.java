@@ -26,7 +26,7 @@ public class SignUpServlet extends HttpServlet {
         User user = Database.getUser(login);
 
         // пользователь уже существует с таким логином
-        if (user != null || login.equals("") || password.length() < 8 || name.equals("")) {
+        if (user != null) {
             resp.sendRedirect("/sign_up");
             return;
         }
@@ -35,12 +35,12 @@ public class SignUpServlet extends HttpServlet {
 
         // session
         HttpSession httpSession = req.getSession();
-        httpSession.setAttribute("login", login);
+        httpSession.setAttribute("name", name);
 
         httpSession.setMaxInactiveInterval(60 * 60);
 
         // cookie
-        Cookie cookie = new Cookie("login", login);
+        Cookie cookie = new Cookie("name", name);
         cookie.setMaxAge(24 * 60 * 60);
 
         resp.addCookie(cookie);

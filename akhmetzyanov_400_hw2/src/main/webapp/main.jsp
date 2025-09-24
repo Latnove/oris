@@ -7,7 +7,7 @@
 <body>
 
 <%
-    String sessionUser = (String) session.getAttribute("user");
+    String sessionUser = (String) session.getAttribute("name");
     if (sessionUser == null) {
         response.sendRedirect("login.html");
     }
@@ -17,7 +17,7 @@
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
         for (Cookie c : cookies) {
-            if ("user".equalsIgnoreCase(c.getName())) {
+            if ("name".equalsIgnoreCase(c.getName())) {
                 cookieUser = c.getValue();
             } else if ("jsessionid".equalsIgnoreCase(c.getName())) {
                 sessionId = c.getValue();

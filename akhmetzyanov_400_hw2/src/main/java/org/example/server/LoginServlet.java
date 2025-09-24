@@ -34,17 +34,17 @@ public class LoginServlet extends HttpServlet {
         if (user.getLogin().equalsIgnoreCase(login) && user.getPassword().equals(password)) {
             // session
             HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("login", user.getLogin());
+            httpSession.setAttribute("name", user.getName());
 
             httpSession.setMaxInactiveInterval(60 * 60);
 
             // cookie
-            Cookie cookie = new Cookie("login", login);
+            Cookie cookie = new Cookie("name", user.getName());
             cookie.setMaxAge(24 * 60 * 60);
 
             resp.addCookie(cookie);
 
-            resp.sendRedirect("main.jsp");
+            resp.sendRedirect("/main.jsp");
         } else {
             resp.sendRedirect("login.html");
         }
