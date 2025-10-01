@@ -31,7 +31,8 @@ public class MainServlet extends HttpServlet {
             sessionId = req.getSession().getId();
         }
 
-        req.setAttribute("user", sessionUser);
+        System.out.println("dsfsd");
+        req.setAttribute("user", "1");
         req.setAttribute("sessionId", sessionId);
         req.setAttribute("cookieUser", cookieUser);
         req.getRequestDispatcher("main.ftl").forward(req, resp);
