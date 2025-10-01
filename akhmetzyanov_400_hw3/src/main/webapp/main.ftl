@@ -5,7 +5,7 @@
 <body>
 
     <h3>
-        Hello 1, ${user!"asfsdf"}! Login successful
+        Hello 1, ${user!"значение по умолчанию"}! Login successful
         <br>
         <br>
     </h3>

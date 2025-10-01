@@ -12,12 +12,12 @@ import java.util.List;
 @WebFilter("/*")
 public class CheckerCorrectUrlFilter extends HttpFilter {
 
-    private final List<String> urlPatterns = Arrays.asList("/main.ftl", "/index.ftl", "/login.ftl", "/main.ftl", "/sign_up.ftl", "/users.ftl");
+    private final List<String> urlPatterns = Arrays.asList("/main", "/index", "/login", "/main", "/sign_up", "/users");
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, javax.servlet.ServletException {
         String path = req.getRequestURI().substring(req.getContextPath().length());
-        boolean matches = urlPatterns.stream().anyMatch(pattern -> path.equals(pattern));
+        boolean matches = urlPatterns.stream().anyMatch(pattern -> path.contains(pattern));
 
         if (matches) {
             System.out.println("Filter triggered for path: " + path);
