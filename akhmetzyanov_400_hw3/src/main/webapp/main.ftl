@@ -5,7 +5,7 @@
 <body>
 
     <h3>
-        Hello 1, ${sessionUser}! Login successful
+        Hello 1, ${user}! Login successful
         <br>
         <br>
     </h3>
