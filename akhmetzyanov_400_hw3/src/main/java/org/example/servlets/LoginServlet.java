@@ -28,14 +28,14 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
         User user = Database.getUser(login);
 
         if (user == null) {
-            resp.sendRedirect("/login");
+            resp.sendRedirect("login.ftl");
             return;
         }
 
@@ -51,10 +51,12 @@ public class LoginServlet extends HttpServlet {
             cookie.setMaxAge(24 * 60 * 60);
 
             resp.addCookie(cookie);
-
-            resp.sendRedirect("/main.ftl");
+            req.setAttribute("user", user.getName());
+            req.setAttribute("sessionId", httpSession.getId());
+            req.setAttribute("cookieUser", cookie.getValue());
+            req.getRequestDispatcher("main.ftl").forward(req, resp);
         } else {
-            resp.sendRedirect("/login.ftl");
+            req.getRequestDispatcher("login.ftl").forward(req, resp);
         }
     }
 

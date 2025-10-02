@@ -14,8 +14,8 @@ import java.util.Map;
 public class SignUpServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("sign_up.ftl");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        req.getRequestDispatcher("sign_up.ftl").forward(req, resp);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class SignUpServlet extends HttpServlet {
 
         // пользователь уже существует с таким логином, пустой логин, имя и пароль меньше 8
         if (user != null || login.equals("") || name.equals("") || password.length() < 8) {
-            resp.sendRedirect("sign_up.ftl");
+            req.getRequestDispatcher("sign_up.ftl").forward(req, resp);
             return;
         }
 
@@ -47,7 +47,9 @@ public class SignUpServlet extends HttpServlet {
         cookie.setMaxAge(24 * 60 * 60);
 
         resp.addCookie(cookie);
-
-        resp.sendRedirect("main.ftl");
+        req.setAttribute("user", name);
+        req.setAttribute("sessionId", httpSession.getId());
+        req.setAttribute("cookieUser", cookie.getValue());
+        req.getRequestDispatcher("main.ftl").forward(req, resp);
     }
 }

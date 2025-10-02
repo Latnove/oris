@@ -7,8 +7,6 @@
 
     <a href="/sign_up.ftl">sign up</a>
 
-    <a href="/main.ftl">main</a>
-
 
     <div id="my_body" class="block">
         <p>

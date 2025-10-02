@@ -5,9 +5,13 @@
 <body>
 
     <h3>
-        Hello 1, ${user!"значение по умолчанию"}! Login successful
+        Hello ${user}! Login successful.
         <br>
+        Session ID: ${sessionId}
         <br>
+        CookieUser: ${cookieUser}
+        <br>
+        <a href="/index.ftl">Вернуться на главную</a>
     </h3>
 
 </body>
