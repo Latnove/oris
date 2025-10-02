@@ -35,11 +35,11 @@ public class LoginServlet extends HttpServlet {
         User user = Database.getUser(login);
 
         if (user == null) {
-            resp.sendRedirect("login.ftl");
+            resp.sendRedirect("/login");
             return;
         }
 
-        if (user.getLogin().equalsIgnoreCase(login) && user.getPassword().equals(password)) {
+        if (user.getLogin().equalsIgnoreCase(login) && user.getPassword().equalsIgnoreCase(password)) {
             // session
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("name", user.getName());
@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("cookieUser", cookie.getValue());
             req.getRequestDispatcher("main.ftl").forward(req, resp);
         } else {
-            req.getRequestDispatcher("login.ftl").forward(req, resp);
+            resp.sendRedirect("/login");
         }
     }
 

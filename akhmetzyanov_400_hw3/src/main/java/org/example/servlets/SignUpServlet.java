@@ -34,7 +34,7 @@ public class SignUpServlet extends HttpServlet {
             return;
         }
 
-        Database.addUser(login, name, password);
+        Database.addUser(login, password, name);
 
         // session
         HttpSession httpSession = req.getSession();

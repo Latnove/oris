@@ -14,11 +14,11 @@ public class Database {
         }
     }
 
-    public static void addUser(String login, String name, String password) {
+    public static void addUser(String login, String password, String name) {
         if (users.containsKey(login.toLowerCase())) {
             return;
         } else {
-            users.put(login.toLowerCase(), new User(login.toLowerCase(), password, name));
+            users.put(login.toLowerCase(), new User( login.toLowerCase(), password, name));
         }
     }
 }
