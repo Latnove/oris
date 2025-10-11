@@ -1,0 +1,29 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>ajax</title>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+		/>
+		<script>
+			$(document).on('click', '#ajax-button', function () {
+				console.log('CLICKED')
+				alert('NS')
+
+				$.get('ajax/hello', function (response) {
+					$('#ajax-response').text(response)
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="flex-box" id="ajax-response"></div>
+
+		<form>
+			<input class="btn" type="button" id="ajax-button" value="get message" />
+		</form>
+	</body>
+</html>
