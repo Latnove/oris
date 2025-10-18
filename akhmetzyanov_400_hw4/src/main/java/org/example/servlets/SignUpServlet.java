@@ -1,7 +1,10 @@
 package org.example.servlets;
 
-import org.example.models.Database;
-import org.example.models.User;
+import org.example.entity.User;
+import org.example.service.LoginService;
+import org.example.service.SignUpService;
+import org.example.service.impl.LoginServiceImpl;
+import org.example.service.impl.SignUpServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,8 @@ import java.util.Map;
 
 @WebServlet(name = "SignUp", urlPatterns = "/sign_up")
 public class SignUpServlet extends HttpServlet {
+    LoginService loginService = new LoginServiceImpl();
+    SignUpService signUpService = new SignUpServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -20,21 +25,17 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("UTF-8");
         // registration
         String login = req.getParameter("login");
-        String name = req.getParameter("name");
         String password = req.getParameter("password");
+        String name = req.getParameter("name");
+        String lastname = req.getParameter("name");
 
-        User user = Database.getUser(login);
-
-        // пользователь уже существует с таким логином, пустой логин, имя и пароль меньше 8
-        if (user != null || login.equals("") || name.equals("") || password.length() < 8) {
+        if (!signUpService.saveUser(new User(0, name, lastname, login, password))) {
             req.getRequestDispatcher("sign_up.ftl").forward(req, resp);
             return;
         }
-
-        Database.addUser(login, name, password);
 
         // session
         HttpSession httpSession = req.getSession();

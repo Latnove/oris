@@ -1,7 +1,8 @@
 package org.example.servlets;
 
-import org.example.models.Database;
-import org.example.models.User;
+import org.example.entity.User;
+import org.example.service.LoginService;
+import org.example.service.impl.LoginServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 @WebServlet(name = "Login", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
+    private final static LoginService loginService = new LoginServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -32,14 +34,14 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        User user = Database.getUser(login);
+        User user = loginService.getUser(login, password);
 
         if (user == null) {
-            resp.sendRedirect("login.ftl");
+            resp.sendRedirect("/login");
             return;
         }
 
-        if (user.getLogin().equalsIgnoreCase(login) && user.getPassword().equals(password)) {
+
             // session
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("name", user.getName());
@@ -55,9 +57,6 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("sessionId", httpSession.getId());
             req.setAttribute("cookieUser", cookie.getValue());
             req.getRequestDispatcher("main.ftl").forward(req, resp);
-        } else {
-            req.getRequestDispatcher("login.ftl").forward(req, resp);
-        }
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @WebFilter("/*")
 public class CheckerCorrectUrlFilter extends HttpFilter {
 
-    private final List<String> urlPatterns = Arrays.asList("/", "/main","/logout", "/index", "/login", "/main", "/sign_up", "/users");
+    private final List<String> urlPatterns = Arrays.asList("/main","/logout", "/index", "/login", "/main", "/sign_up", "/users");
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, javax.servlet.ServletException {
