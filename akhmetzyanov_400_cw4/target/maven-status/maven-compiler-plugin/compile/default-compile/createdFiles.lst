@@ -1,8 +1,8 @@
 servlet/UserServlet.class
 servlet/LogoutServlet.class
 util/DataBaseConnectionUtil.class
-servlet/FileUploadServlet.class
 filter/AuthenticationFilter.class
+util/CloudinaryUtil.class
 servlet/ExceptionServlet.class
 filter/LoggingFilter.class
 entity/User.class

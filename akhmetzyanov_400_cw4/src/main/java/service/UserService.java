@@ -1,9 +1,11 @@
 package service;
 
+import com.cloudinary.Cloudinary;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
 import dto.UserDto;
 import entity.User;
+import util.CloudinaryUtil;
 
 import javax.servlet.http.Part;
 import java.io.File;
@@ -12,14 +14,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 public class UserService {
-    private static final String FILE_PREFIX = "/Users/bulat/Coding/java/oris/aud/HttpSevlet/src/main/webapp/images";
-    private static final Integer DIR_COUNT = 100;
-
     private final UserDao userDao = new UserDaoImpl();
+    private final Cloudinary cloudinary = CloudinaryUtil.getCloudinary();
+
 
     public List<UserDto> getAll() {
         List<User> list = userDao.getAll();
@@ -40,20 +42,11 @@ public class UserService {
     }
 
     public String saveImage(Part part) throws IOException {
-        String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-        int abs = Math.abs(filename.hashCode() % DIR_COUNT);
-        String path = FILE_PREFIX + File.separator + abs + File.separator + filename;
-        File file = new File(path);
-        InputStream content = part.getInputStream();
-        if (file.getParentFile().mkdirs() &&
-                file.createNewFile()) {
-            FileOutputStream outputStream = new FileOutputStream(file);
-            byte[] buffer = new byte[content.available()];
-            content.read(buffer);
-            outputStream.write(buffer);
-            outputStream.close();
-        }
+        int available = part.getInputStream().available();
+        byte[] bytes = new byte[available];
+        part.getInputStream().read(bytes);
+        cloudinary.uploader().upload(bytes, new HashMap<>());
 
-        return "images/" + abs + "/"  + filename;
+        return (String) cloudinary.uploader().upload(bytes, new HashMap<>()).get("secure_url");
     }
 }
