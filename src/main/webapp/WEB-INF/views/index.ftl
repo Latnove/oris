@@ -5,11 +5,11 @@
 <body>
 <h1>Hello World, ${name!"Человек"}!</h1>
 
-<form method="post" action="/index">
+<form method="post" action="/users">
     <div class="left-characters"></div>
     <label>
         Добавить пользователя:
-        <input class="input" value="" placeholder="Username" name="name" required maxlength="15"/>
+        <input class="input" value="" placeholder="Username" name="username" required maxlength="15"/>
     </label>
     <button type="submit" class="button" style="background-color: azure; border: 1px solid darkgray; padding: 10px 20px">Отправить</button>
 </form>

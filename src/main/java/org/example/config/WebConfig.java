@@ -13,7 +13,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
 @EnableScheduling
-@EnableTransactionManagement
 @ComponentScan("org.example.controller")
 public class WebConfig extends WebMvcConfigurationSupport {
 

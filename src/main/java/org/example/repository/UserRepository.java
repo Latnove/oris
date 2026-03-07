@@ -1,28 +1,17 @@
 package org.example.repository;
 
-import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
 import org.example.model.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import java.util.Optional;
 
-@Component
-@Slf4j
-public class UserRepository {
-    private SessionFactory sessionFactory;
+public interface UserRepository  extends JpaRepository<User, Long> {
+        Optional<User> findByUsername(String username);
 
-    public UserRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+        User deleteByUsername(String username);
+        @Query(value = "select * from users u where u.username = ?1", nativeQuery = true)
+        Optional<User> getByUsernameNative(String username);
 
-    public List<User> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("from User", User.class).list();
-    }
 
-    public void save(User user) {
-        sessionFactory.getCurrentSession().save(user);
-    }
 }
