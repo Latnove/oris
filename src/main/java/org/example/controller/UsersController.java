@@ -1,13 +1,10 @@
 package org.example.controller;
 
 import org.example.dto.UserDto;
-import org.example.model.User;
 import org.example.service.UserService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,15 +27,10 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public UserDto indexPost(@RequestParam("username") String username) {
-
-        UserDto user = new UserDto();
-        user.setUsername(username);
-
-        UserDto userDto = userService.save(user);
-
-        return userDto;
+    public UserDto indexPost(@RequestBody UserDto user) {
+        return userService.save(user);
     }
+
 
     @PutMapping
     public ResponseEntity<UserDto> update(@RequestBody UserDto dto) {

@@ -14,6 +14,7 @@ val freemarkerVersion: String by project
 val hikariVersion: String by project
 val lombokVersion: String by project;
 val springDataVersion: String by project;
+val springSecurityVersion: String by project;
 
 repositories {
     mavenCentral()
@@ -34,6 +35,10 @@ dependencies {
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
+    implementation("org.springframework.security:spring-security-core:${springSecurityVersion}")
+    implementation("org.springframework.security:spring-security-web:${springSecurityVersion}")
+    implementation("org.springframework.security:spring-security-config:${springSecurityVersion}")
+    implementation("org.springframework.security:spring-security-taglibs:${springSecurityVersion}")
 }
 
 //application {

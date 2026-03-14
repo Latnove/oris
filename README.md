@@ -1,11 +1,8 @@
-## GET /users
-![Main Page](images/img_2.png)
+## /index page for register
+![](images/img_4.png)
 
-## POST from form index.ftl
-![Main Page](images/img_1.png)
+## /users page after login
+![](images/img_5.png)
 
-## PUT
-![Main Page](images/img.png)
-
-## DELETE
-![Main Page](images/img_3.png)
+## user_role
+![img.png](images/img_6.png)

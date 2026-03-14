@@ -3,9 +3,12 @@ package org.example.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.UserDto;
+import org.example.model.Role;
 import org.example.model.User;
+import org.example.repository.RoleRepository;
 import org.example.repository.UserRepository;
 import org.example.repository.UserRepositoryHibernate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Transactional
     public List<UserDto> findAll() {
@@ -49,6 +53,13 @@ public class UserService {
         UserDto dto = new UserDto();
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
+        dto.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        dto.setRoles(
+                user.getRoles()
+                        .stream()
+                        .map(Role::getName)
+                        .toList()
+        );
         return dto;
     }
 
@@ -56,6 +67,9 @@ public class UserService {
         User user = new User();
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
+        user.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
+        List<Role> roles = roleRepository.findAllByNameIn(dto.getRoles());
+        user.setRoles(roles);
         return user;
     }
 
