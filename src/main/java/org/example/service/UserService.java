@@ -28,6 +28,12 @@ public class UserService {
                 .toList();
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow();
+
+    }
+
     @Transactional
     public UserDto save(UserDto dto) {
         return toDto(userRepository.save(toEntity(dto)));

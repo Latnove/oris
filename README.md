@@ -1,8 +1,22 @@
-## /index page for register
-![](images/img_4.png)
+Добавить сущность Note (id, title, content, createdAt, isPublic, author → @ManyToOne на User). Пользователь может создавать, редактировать и удалять свои заметки. Заметки бывают публичные и приватные.
 
-## /users page after login
-![](images/img_5.png)
+Репозиторий: NoteRepository extends JpaRepository<Note, Long> с методами findByAuthor(User), findByIsPublicTrue(), поиск через @Query.
 
-## user_role
-![img.png](images/img_6.png)
+Security: /notes/public – доступен всем, /notes/** – только ROLE_USER, /admin/** – только ROLE_ADMIN.
+
+NoteController (@Controller + FreeMarker):
+
+GET /notes — мои заметки
+GET /notes/public – публичные (без логина)
+GET/POST /notes/create – создание
+GET/POST /notes/{id}/edit – редактирование (только своя)
+POST /notes/{id}/delete – удаление (только своя)
+AdminNoteController (@RestController):
+
+GET /admin/notes – все заметки всех пользователей (JSON)
+DELETE /admin/notes/{id} – удаление любой заметки
+Шаблоны (FreeMarker): notes.ftl, note_form.ftl, public_notes.ftl
+
+Проверить: без логина /notes → редирект, /notes/public → работает; user не может открыть /admin/notes (403); нельзя редактировать чужую заметку
+
+дедлайн: сегодняшний день
