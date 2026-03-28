@@ -96,6 +96,11 @@
     </div>
 
     <div class="input-group">
+        <label>Email: <span class="left-characters"></span></label>
+        <input class="email" placeholder="Введите email" name="email" type="email" required>
+    </div>
+
+    <div class="input-group">
         <label>Password</label>
         <input class="password" placeholder="Введите пароль" name="password" required minlength="8" />
     </div>
@@ -108,6 +113,7 @@
     const MAX_CHARACTERS = 15
     const usernameEl = document.querySelector(".username")
     const passwordEl = document.querySelector(".password")
+    const emailEl = document.querySelector(".email")
     const leftEl = document.querySelector(".left-characters")
     const buttonEl = document.querySelector(".button")
     const formEl = document.querySelector(".form-card")
@@ -139,7 +145,7 @@
                 body: JSON.stringify({
                     username: usernameEl.value,
                     password: passwordEl.value,
-                    roles: ["USER"]
+                    email: emailEl.value,
                 })
             })
 

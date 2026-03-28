@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.security;
 
 import org.example.model.User;
 import org.example.repository.UserRepository;

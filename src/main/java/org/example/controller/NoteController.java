@@ -2,8 +2,8 @@ package org.example.controller;
 
 import org.example.model.Note;
 import org.example.model.User;
-import org.example.service.NoteService;
-import org.example.service.UserService;
+import org.example.service.impl.NoteService;
+import org.example.service.impl.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

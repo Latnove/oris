@@ -1,5 +1,6 @@
-package org.example.service;
+package org.example.service.security;
 
+import lombok.AllArgsConstructor;
 import org.example.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,9 +9,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 
+@AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private final User user;
+
+    private boolean isEnabled = false;
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -32,5 +36,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return user.getUsername();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
     }
 }

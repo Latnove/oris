@@ -13,5 +13,6 @@ public interface UserRepository  extends JpaRepository<User, Long> {
         @Query(value = "select * from users u where u.username = ?1", nativeQuery = true)
         Optional<User> getByUsernameNative(String username);
 
-
+        @Query(value = "select * from users u where u.verification_code = ? and u.is_enabled = false", nativeQuery = true)
+        Optional<User> getByVerificationCode(String verificationCode);
 }
