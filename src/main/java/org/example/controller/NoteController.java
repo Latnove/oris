@@ -4,10 +4,12 @@ import org.example.model.Note;
 import org.example.model.User;
 import org.example.service.impl.NoteService;
 import org.example.service.impl.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/notes")
@@ -71,7 +73,7 @@ public class NoteController {
         Note note = noteService.getById(id);
 
         if (!note.getAuthor().getId().equals(user.getId())) {
-            throw new RuntimeException("Нет доступа");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Нет доступа");
         }
 
         note.setTitle(updated.getTitle());

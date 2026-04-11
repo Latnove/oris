@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -117,13 +116,13 @@ public class UserService {
         UserDto dto = new UserDto();
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
-        dto.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        dto.setPassword(user.getPassword());
         dto.setEmail(user.getEmail());
         dto.setRoles(
-                user.getRoles()
-                        .stream()
-                        .map(Role::getName)
-                        .toList()
+                user.getRoles() == null ? List.of() :
+                        user.getRoles().stream()
+                                .map(Role::getName)
+                                .toList()
         );
         return dto;
     }
@@ -132,8 +131,8 @@ public class UserService {
         User user = new User();
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
-        user.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
         List<Role> roles = roleRepository.findAllByNameIn(dto.getRoles());
         user.setRoles(roles);
         return user;
