@@ -1,5 +1,7 @@
-## Приходит подтверждение
+## Покрыто 61% тестами
 
-![img.png](images/img123.png)
+![img.png](images/img_7.png)
 
-## Далее обрабатывается по /verification?code=
+## Покрыто 80% тестами
+
+![img.png](images/image_9.png)

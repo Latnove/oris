@@ -59,6 +59,26 @@ class NoteControllerTest {
     }
 
     @Test
+    void shouldReturnEditForm_whenUserIsOwner() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("bulka");
+
+        Note note = new Note();
+        note.setId(1L);
+        note.setAuthor(user);
+
+        when(userService.findByUsername("bulka")).thenReturn(user);
+        when(noteService.getById(1L)).thenReturn(note);
+
+        mockMvc.perform(get("/notes/1/edit")
+                        .with(user("bulka")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("note_form"))
+                .andExpect(model().attributeExists("note"));
+    }
+
+    @Test
     void shouldReturnPublicNotes() throws Exception {
         User user = new User();
         user.setId(1L);
