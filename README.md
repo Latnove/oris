@@ -1,7 +1,7 @@
-## Покрыто 61% тестами
+## Персентиль 90%
 
-![img.png](images/img_7.png)
+![img.png](images/24-04-2026/img.png)
 
-## Покрыто 80% тестами
+## Метрики
 
-![img.png](images/image_9.png)
+![img_1.png](images/24-04-2026/img_1.png)
