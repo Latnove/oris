@@ -4,6 +4,8 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.aop.Benchmark;
+import org.example.aop.TrackExecution;
 import org.example.config.properties.MailProperties;
 import org.example.dto.UserDto;
 import org.example.model.Role;
@@ -33,6 +35,8 @@ public class UserService {
 
 
     @Transactional
+    @TrackExecution
+    @Benchmark
     public List<UserDto> findAll() {
         return userRepository.findAll()
                 .stream()
@@ -40,6 +44,8 @@ public class UserService {
                 .toList();
     }
 
+    @TrackExecution
+    @Benchmark
     public User findByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow();
@@ -47,6 +53,7 @@ public class UserService {
     }
 
     @Transactional
+    @TrackExecution
     public void createUser(UserDto userDto) {
         User user = toEntity(userDto);
         String verificationCode = UUID.randomUUID().toString();
@@ -57,6 +64,7 @@ public class UserService {
     }
 
     @Transactional
+    @TrackExecution
     public boolean verifyUser(String verificationCode) {
         Optional<User> userOpt = userRepository.getByVerificationCode(verificationCode);
         if (userOpt.isEmpty()) return false;
@@ -89,6 +97,7 @@ public class UserService {
         return toDto(userRepository.deleteByUsername(username));
     }
 
+    @TrackExecution
     private void sendVerificationMail(User user) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);

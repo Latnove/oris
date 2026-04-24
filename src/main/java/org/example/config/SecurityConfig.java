@@ -37,13 +37,15 @@ public class SecurityConfig {
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/index").permitAll()
+                                .requestMatchers("/metrics").permitAll()
+                                .requestMatchers("/benchmark").permitAll()
+                                .requestMatchers("/hello").permitAll()
+                                .requestMatchers("/users").permitAll()
                                 .requestMatchers("/auth").permitAll()
                                 .requestMatchers("/notes/public").permitAll()
                                 .requestMatchers("/verification/**").permitAll()
                                 .requestMatchers("/notes/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers("/hello").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/users").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().authenticated()
             ).formLogin(Customizer.withDefaults());
 

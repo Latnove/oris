@@ -36,6 +36,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("org.springframework.boot:spring-boot-starter-freemarker")
     implementation("org.liquibase:liquibase-core:4.33.0")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
     liquibaseRuntime("org.liquibase:liquibase-core:4.33.0")
     liquibaseRuntime("org.postgresql:postgresql:$postgresVersion")
     liquibaseRuntime("info.picocli:picocli:4.6.3")
