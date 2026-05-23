@@ -21,6 +21,7 @@ val hikariVersion: String by project
 val lombokVersion: String by project;
 val springDataVersion: String by project;
 val springSecurityVersion: String by project;
+val jwtVersion: String by project;
 
 repositories {
     mavenCentral()
@@ -35,8 +36,21 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("org.springframework.boot:spring-boot-starter-freemarker")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.liquibase:liquibase-core:4.33.0")
     implementation("org.springframework.boot:spring-boot-starter-aop")
+
+    implementation("io.jsonwebtoken:jjwt-api:$jwtVersion")
+    implementation("io.jsonwebtoken:jjwt-impl:$jwtVersion")
+    implementation("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
+
+    implementation("org.webjars:stomp-websocket:2.3.4")
+    implementation("org.webjars:sockjs-client:1.5.1")
+    implementation("org.webjars:bootstrap:4.6.0")
+    implementation("org.webjars:webjars-locator-core:0.46")
+
+
+
     liquibaseRuntime("org.liquibase:liquibase-core:4.33.0")
     liquibaseRuntime("org.postgresql:postgresql:$postgresVersion")
     liquibaseRuntime("info.picocli:picocli:4.6.3")
@@ -133,4 +147,12 @@ tasks.jacocoTestCoverageVerification {
             exclude(jacocoExcludes)
         }
     }))
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir("src/main/webapp")
+        }
+    }
 }

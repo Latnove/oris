@@ -42,3 +42,9 @@ mail:
   subject: Please verify your accound
   content: "Dear $name, please follow the link below to verify your account: <a href=$url>ПЕРЕЙДИ ДА</a>"
   baseUrl: http://localhost:${server.port}
+
+jwt:
+  access:
+    access: "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY="
+  refresh:
+    access: "ZmVkY2JhOTg3NjU0MzIxMGZlZGNiYTk4NzY1NDMyMTA="

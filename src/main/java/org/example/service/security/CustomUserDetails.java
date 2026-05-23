@@ -18,6 +18,7 @@ public class CustomUserDetails implements UserDetails {
 
     public CustomUserDetails(User user) {
         this.user = user;
+        this.isEnabled = user.isEnabled();
     }
 
     @Override
